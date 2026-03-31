@@ -9,7 +9,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "https://school-1uy4.onrender.com/",
+    origin: "https://school-website-4klr.onrender.com/",
     credentials: true,
   })
 );
