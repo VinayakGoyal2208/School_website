@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Arrow pointing RIGHT ▶ */
+.arrow-right {
+  clip-path: polygon(0 0, 92% 0, 96% 50%, 92% 100%, 0 100%);
+}
+
+/* Arrow pointing LEFT ◀ */
+.arrow-left {
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 8% 100%, 0 50%);
+}
