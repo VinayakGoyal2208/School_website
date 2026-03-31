@@ -1,7 +1,68 @@
+import { useState } from "react";
+
 export default function ApplyNow() {
+  const [formData, setFormData] = useState({
+    studentName: "",
+    parentName: "",
+    email: "",
+    phone: "",
+    className: "",
+    dob: "",
+    address: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // ✅ PHONE VALIDATION HERE
+    if (!/^\d{10}$/.test(formData.phone)) {
+      alert("Enter a valid 10-digit phone number");
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        "https://school-website-yrmq.onrender.com/api/apply",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Application submitted successfully!");
+
+        // reset form
+        setFormData({
+          studentName: "",
+          parentName: "",
+          email: "",
+          phone: "",
+          className: "",
+          dob: "",
+          address: "",
+        });
+      } else {
+        alert(data.message || "Something went wrong");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Server error");
+    }
+  };
   return (
     <div className="bg-gray-100">
-
       {/* ================= HERO ================= */}
       <section id="hero" className="relative h-[60vh] md:h-[70vh] w-full">
         <img
@@ -20,9 +81,7 @@ export default function ApplyNow() {
 
       {/* ================= INFO CARDS ================= */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-[6%] py-12 -mt-16 relative z-20">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
           <div className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
             <h3 className="font-semibold mb-2">Eligibility</h3>
             <p className="text-sm text-gray-600">
@@ -43,19 +102,16 @@ export default function ApplyNow() {
               Applications open till March 31.
             </p>
           </div>
-
         </div>
       </div>
 
       {/* ================= PROCESS ================= */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-[6%] pb-12">
-
         <h2 className="text-2xl md:text-3xl font-serif mb-8 text-center">
           Admission Process
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-
           {[
             "Fill Application Form",
             "Submit Documents",
@@ -72,69 +128,98 @@ export default function ApplyNow() {
               <p className="text-sm text-gray-700">{step}</p>
             </div>
           ))}
-
         </div>
       </div>
 
       {/* ================= FORM ================= */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-[6%] pb-12">
-
         <div className="bg-white p-6 md:p-10 rounded-xl shadow">
           <h2 className="text-2xl md:text-3xl font-serif mb-6 text-center">
             Application Form
           </h2>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
             <input
               type="text"
               placeholder="Student Name"
+              name="studentName"
+              value={formData.studentName}
+              required
+              onChange={handleChange}
               className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             />
 
             <input
               type="text"
               placeholder="Parent Name"
+              name="parentName"
+              value={formData.parentName}
+              required
+              onChange={handleChange}
               className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             />
 
             <input
               type="email"
               placeholder="Email Address"
+              value={formData.email}
+              name="email"
+              required
+              onChange={handleChange}
               className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             />
 
             <input
               type="tel"
               placeholder="Phone Number"
+              name="phone"
+              value={formData.phone}
+              required
+              onChange={(e) => {
+                if (/^\d*$/.test(e.target.value)) {
+                  handleChange(e);
+                }
+              }}
+              maxLength={10}
               className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             />
 
             {/* CLASS DROPDOWN */}
-            <select className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none">
-              <option>Select Class</option>
-              <option>Nursery</option>
-              <option>KG</option>
-              <option>1st</option>
-              <option>2nd</option>
+            <select
+              name="className"
+              value={formData.className}
+              required
+              onChange={handleChange}
+              className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
+            >
+              <option value="">Select Class</option>
+              <option value="Nursery">Nursery</option>
+              <option value="KG">KG</option>
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
             </select>
 
             <input
               type="date"
+              name="dob"
+              value={formData.dob}
+              required
+              onChange={handleChange}
               className="border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             />
 
             <textarea
+              name="address"
+              required
+              onChange={handleChange}
+              value={formData.address}
               placeholder="Address"
               rows="4"
               className="md:col-span-2 border border-gray-300 rounded px-4 py-3 focus:border-yellow-500 outline-none"
             ></textarea>
-
-            {/* FILE UPLOAD */}
-            <input
-              type="file"
-              className="md:col-span-2 border border-gray-300 rounded px-4 py-2"
-            />
 
             <button
               type="submit"
@@ -142,7 +227,6 @@ export default function ApplyNow() {
             >
               Submit Application
             </button>
-
           </form>
         </div>
       </div>
