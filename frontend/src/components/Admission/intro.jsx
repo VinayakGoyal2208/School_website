@@ -35,7 +35,7 @@ export default function Intro() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 pt-4">
             
             <Link
-              to="/contact"
+              to="/apply#hero"
               className="w-full sm:w-auto text-center border border-yellow-600 text-yellow-700 px-6 py-3 rounded-full text-sm tracking-wide hover:bg-yellow-50 transition"
             >
               SUBMIT AN INQUIRY

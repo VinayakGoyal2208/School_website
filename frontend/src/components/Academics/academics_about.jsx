@@ -19,7 +19,7 @@ export default function academicsAbout() {
               career planning, and hands-on experiences.
             </p>
 
-            <Link to="/contact#hero" className="mt-4 bg-yellow-600 text-white px-6 py-2 rounded-full hover:bg-yellow-700 transition">
+            <Link to="/apply#hero" className="mt-4 bg-yellow-600 text-white px-6 py-2 rounded-full hover:bg-yellow-700 transition">
               VIEW COURSE CATALOG
             </Link>
           </div>

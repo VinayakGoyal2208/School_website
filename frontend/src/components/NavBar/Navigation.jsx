@@ -135,12 +135,11 @@ export default function NavBar() {
               </HashLink>
 
               <HashLink
-                to="/contact#hero"
+                to="/loginpage"
                 className="bg-gray-800 px-4 py-2 text-white font-semibold rounded-r-full hover:bg-black transition"
               >
-                CONTACT US
+                Sign In / Up
               </HashLink>
-              <Link to="/loginpage" target="_blank" className={`ml-7 px-4 py-2 hover:text-blue-500 font-semibold rounded-full hover:text-blue-500${scrolled? "bg-white text-black shadow-md" : "bg-transparent text-white"}`}>Sign In / Up</Link>
             </div>
           </div>
 
@@ -211,21 +210,12 @@ export default function NavBar() {
           </HashLink>
 
           <HashLink
-            to="/contact#hero"
+            to="/loginpage"
             onClick={() => setMenuOpen(false)}
             className="bg-gray-700 text-white py-2 rounded text-center hover:bg-gray-800"
           >
-            Contact Us
-          </HashLink>
-
-          <Link
-            to="/loginpage"
-            onClick={() => setMenuOpen(false)}
-            target="_blank"
-            className="decoration-underline hover:text-blue-400 text-center cursor-pointer"
-          >
             Sign In / Up
-          </Link>
+          </HashLink>
         </div>
       </div>
     </>

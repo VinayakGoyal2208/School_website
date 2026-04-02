@@ -239,12 +239,57 @@ export default function ApplyNow() {
         <p className="text-gray-400 mb-4 text-sm md:text-base">
           Contact our admission office for guidance.
         </p>
-        <a
-          href="/contact"
-          className="bg-yellow-500 text-black px-6 py-2 rounded font-semibold hover:bg-yellow-600 transition"
-        >
-          Contact Us
-        </a>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
+          <div className="flex items-center gap-2 text-yellow-500">
+            {/* Email Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 8l9 6 9-6M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"
+              />
+            </svg>
+
+            <a
+              href="mailto:school@gmail.com"
+              className="font-semibold hover:text-yellow-600 transition"
+            >
+              school@gmail.com
+            </a>
+          </div>
+
+          <div className="flex items-center gap-2 text-yellow-500">
+            {/* Phone Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 5a2 2 0 012-2h3l2 5-2 2a11 11 0 005 5l2-2 5 2v3a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+
+            <a
+              href="tel:+1234567890"
+              className="font-semibold hover:text-yellow-600 transition"
+            >
+              +1 (234) 567-890
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* SPACE */}

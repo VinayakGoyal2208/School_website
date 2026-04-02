@@ -6,7 +6,6 @@ import About from "./pages/About";
 import Admission from "./pages/Admission";
 import Academics from "./pages/Academics";
 import Extracurricular from "./pages/Extracurricular";
-import Contact from "./pages/Contact";
 import ApplyNow from "./pages/Apply";
 import LoginPage from "./components/LoginPage";
 import Register from "./components/Register";
@@ -33,7 +32,6 @@ export function App() {
         <Route path="/admission" element={<Admission />} />
         <Route path="/academics" element={<Academics />} />
         <Route path="/extracurricular" element={<Extracurricular />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/apply" element={<ApplyNow />} />
         <Route path="/loginpage" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
