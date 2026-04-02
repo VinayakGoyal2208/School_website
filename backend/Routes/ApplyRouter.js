@@ -1,47 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 router.post("/apply", async (req, res) => {
-  const {
-    studentName,
-    parentName,
-    email,
-    phone,
-    className,
-    dob,
-    address,
-  } = req.body;
+  const data = req.body;
 
+  
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New Application",
+    await resend.emails.send({
+      from: "onboarding@resend.dev", // default (works for testing)
+      to: process.env.EMAIL_USER, // your email
+      subject: "New Student Application",
       html: `
-        <h2>New Student Application</h2>
-        <p><b>Name:</b> ${studentName}</p>
-        <p><b>Parent:</b> ${parentName}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Class:</b> ${className}</p>
-        <p><b>DOB:</b> ${dob}</p>
-        <p><b>Address:</b> ${address}</p>
+      <h2>New Student Application</h2>
+      <p><b>Name:</b> ${data.studentName}</p>
+      <p><b>Parent:</b> ${data.parentName}</p>
+      <p><b>Email:</b> ${data.email}</p>
+      <p><b>Phone:</b> ${data.phone}</p>
+      <p><b>Class:</b> ${data.className}</p>
+      <p><b>DOB:</b> ${data.dob}</p>
+      <p><b>Address:</b> ${data.address}</p>
       `,
     });
-
-    res.json({ message: "Application sent successfully" });
+    // ✅ instant response (fast UX)
+    res.json({ message: "Application submitted successfully" });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Form Submission Failed" });
+    console.log("Resend error:", err);
+    // ❌ send failure if email fails
+    res.status(500).json({ message: "Failed to send application" });
   }
 });
 
