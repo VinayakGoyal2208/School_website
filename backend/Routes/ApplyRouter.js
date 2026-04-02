@@ -41,7 +41,7 @@ router.post("/apply", async (req, res) => {
     res.json({ message: "Application sent successfully" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Email failed" });
+    res.status(500).json({ message: "Form Submission Failed" });
   }
 });
 
