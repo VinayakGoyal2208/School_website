@@ -41,7 +41,7 @@ export default function NavBar() {
       >
         <div
           className={`w-full flex items-center transition-all duration-300 ${
-            scrolled ? "h-[90px] px-6" : "h-[120px] px-6"
+            scrolled ? "h-[90px] px-4" : "h-[120px] px-[1.5rem]"
           }`}
         >
           {/* LOGO */}
@@ -62,10 +62,10 @@ export default function NavBar() {
 
           {/* DESKTOP MENU */}
           <div
-            className="hidden md:flex ml-auto relative"
+            className="hidden lg:flex ml-auto relative"
             onMouseLeave={handleLeave}
           >
-            <ul className="flex ml-20 text-[15px] font-medium tracking-wide">
+            <ul className="flex ml-auto text-[15px] font-medium tracking-wide">
               <li className="px-4 py-2 border-r-2 border-yellow-500">
                 <HashLink
                   to="/home#hero"
@@ -126,7 +126,7 @@ export default function NavBar() {
             )}
 
             {/* BUTTONS */}
-            <div className="flex ml-6">
+            <div className="flex">
               <HashLink
                 to="/apply#hero"
                 className="bg-yellow-500 px-4 py-2 text-white font-semibold rounded-l-full hover:bg-yellow-600 transition"
@@ -144,7 +144,7 @@ export default function NavBar() {
           </div>
 
           {/* MOBILE BUTTON */}
-          <div className="md:hidden ml-auto z-50">
+          <div className="lg:hidden ml-auto z-50">
             {!menuOpen ? (
               <button onClick={() => setMenuOpen(true)} className="text-2xl">
                 <FaBars />
