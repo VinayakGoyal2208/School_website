@@ -12,6 +12,7 @@ import Register from "./components/Register";
 import { useLocation } from "react-router-dom";
 
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 import ERPPage from "./components/ERPPage";
 
@@ -38,6 +39,7 @@ export function App() {
         <Route path="/erp/:className" element={<ERPPage />} />
       </Routes>
       {!hideLayout && <Footer />}
+      <Analytics />
     </>
   );
 }
